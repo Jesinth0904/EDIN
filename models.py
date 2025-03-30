@@ -6,10 +6,19 @@ import os
 import time
 
 # Initialize pygame mixer for playing music
-pygame.mixer.init()
+is_headless = "DISPLAY" not in os.environ and "WAYLAND_DISPLAY" not in os.environ
+
+try:
+    if not is_headless:
+        pygame.mixer.init()  # Initialize only if audio is available
+    else:
+        print("Running in a headless environment. Skipping pygame.mixer.init()")
+except pygame.error as e:
+    print(f"⚠️ Pygame mixer error: {e}")
+    pygame.mixer.quit()
 HAPPY_MUSIC_PATH = 'Our Cycle Bgm-Downringtone.com.mp3'  # Ensure this file exists in the project directory
 music_played = False  # Track if music has been played
-pygame.mixer.quit()
+
 
 def play_music():
     global music_played
