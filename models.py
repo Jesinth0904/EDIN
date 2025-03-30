@@ -9,6 +9,7 @@ import time
 pygame.mixer.init()
 HAPPY_MUSIC_PATH = 'Our Cycle Bgm-Downringtone.com.mp3'  # Ensure this file exists in the project directory
 music_played = False  # Track if music has been played
+pygame.mixer.quit()
 
 def play_music():
     global music_played
